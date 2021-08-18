@@ -83,4 +83,29 @@ body {
 
 #add-book:hover {
     transform: scale(1.1);
+    cursor: pointer;
+}
+
+.createdDiv {
+    animation-name: fade;
+    animation-duration: 1s;
+    background: palegoldenrod;
+    border-radius: 10px;
+    position: fixed;
+    display: block;
+    bottom: 15%;
+    right: 50%;
+    left: 35%;
+    height: 25em;
+    width: 30em;
+    border: 1px solid darkgoldenrod;
+}
+
+@keyframes fade {
+    0% {
+        opacity: 0.1;
+    }
+    50% {
+        opacity: 1;
+    }
 }
