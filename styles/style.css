@@ -1,0 +1,86 @@
+@font-face {
+    font-family: 'Diogenes';
+    src: url(../resources/DIOGENES.ttf);
+}
+
+body {
+    background: #f5cfaa;
+}
+
+#header {
+    height: 9em;
+    border-bottom: 2px solid maroon;
+    text-align: center;
+}
+
+#book-img {
+    display: inline-block;
+    width: 10em;
+    height: 7em;
+    margin: 1em;
+}
+
+#title-text {
+    position: relative;
+    bottom: 0.5em;
+    display: inline-block;
+    font-size: 5rem;
+    font-family: 'Diogenes', sans-serif;
+    color: brown;
+}
+
+#content {
+    display: grid;
+    grid-template-columns: 11em 1fr;
+}
+
+#categories {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    font-size: 1.5em;
+    min-height: 100vh;
+    box-sizing: border-box;
+    border-right: 2px solid maroon;
+    background: burlywood;
+}
+
+#categories li {
+    width: 110%;
+    font-family: 'Diogenes', sans-serif;
+    text-align: center;
+    margin: 1em 0.5em 1em 0.5em;
+    border-bottom: 2px solid maroon;
+    height: 1.5em;
+    padding-top: 0.2em;
+    padding-bottom: 0.2em;
+}
+
+#categories li:hover {
+    color: maroon;
+    cursor: pointer;
+}
+
+#extra-space {
+    margin-top: 0;
+    pointer-events: none;
+    height: 14px !important;
+}
+
+#top-cont {
+    background: burlywood;
+    border-bottom: 2px solid maroon;
+    height: 3em;
+}
+
+#add-book {
+    position: sticky;
+    top: 32em;
+    left:75em;
+    height: 42px;
+    width: 42px;
+}
+
+#add-book:hover {
+    transform: scale(1.1);
+}
