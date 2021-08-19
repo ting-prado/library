@@ -5,6 +5,39 @@ options.forEach(option => {
     option.addEventListener('click', changeColor);
 });
 
+const toBlur = document.querySelectorAll('.toBlur');
+const addBookUI = document.querySelector('.addBookUI');
+const addBookBtn = document.querySelector('#addBookBtn');
+addBookBtn.addEventListener('click', openUI);
+toBlur.forEach(element => {
+    element.addEventListener('click', closeUI);
+})
+
+function openUI() {
+    if(addBookUI.style.display == 'none') {
+        addBookUI.style.display = 'block';
+        toBlur.forEach(element => {
+            element.classList.add('toBlurEffect');
+        });
+    }
+    else {
+        addBookUI.style.display = 'none';
+        toBlur.forEach(element => {
+            element.classList.remove('toBlurEffect');
+        });
+    }
+}
+
+function closeUI() {
+    if(addBookUI.style.display == 'block'){
+        addBookUI.style.display = 'none';
+        toBlur.forEach(element => {
+            element.classList.remove('toBlurEffect');
+        });
+    }
+    else return;
+}
+
 function changeColor(e) {
     this.style.color = 'maroon';
     for(let i=1; i<options.length; i++){
@@ -12,16 +45,6 @@ function changeColor(e) {
             options[i].style.color = 'black';
         }
     }
-}
-
-const addBook = document.querySelector('#add-book');
-addBook.addEventListener('click', getUserInput);
-
-function getUserInput() {
-    const div = document.createElement('div');
-    const container = document.querySelector('body');
-    div.classList.add('createdDiv');
-    container.appendChild(div);
 }
 
 function Book(title, author, pages, haveRead) {
