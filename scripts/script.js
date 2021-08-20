@@ -12,6 +12,7 @@ addBookBtn.addEventListener('click', openUI);
 toBlur.forEach(element => {
     element.addEventListener('click', closeUI);
 })
+const addBookUIBtn = document.querySelector('click', addBook);
 
 function openUI() {
     if(addBookUI.style.display == 'none') {

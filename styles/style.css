@@ -17,6 +17,7 @@ body {
     height: 6.8em;
     border-bottom: 2px solid maroon;
     text-align: center;
+    background: burlywood;
 }
 
 #book-img {
@@ -69,24 +70,6 @@ body {
     cursor: pointer;
 }
 
-#extra-space {
-    border-bottom: 2px solid maroon;
-    margin-top: 0;
-    pointer-events: none;
-    height: 1.6em;
-    width: 7em;
-    padding-top: 0.2em;
-    padding-bottom: 0.2em;
-}
-
-#top-cont {
-    background: burlywood;
-    border-bottom: 2px solid maroon;
-    height: 3em;
-    width: 100%;
-    margin-left: 1.3em;
-}
-
 #addBookBtn {
     position: fixed;
     top: 32em;
@@ -102,7 +85,7 @@ body {
 
 .addBookUI {
     animation-name: fade;
-    animation-duration: 1s;
+    animation-duration: 1.5s;
     background: #fdd97d;
     color: maroon;
     border-radius: 10px;
@@ -152,7 +135,7 @@ body {
 }
 
 .toBlurEffect {
-    filter: opacity(0.5) blur(1px);
+    filter: opacity(0.5) blur(2px);
 }
 
 @keyframes fade {
