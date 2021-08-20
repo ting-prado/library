@@ -1,10 +1,10 @@
 @font-face {
     font-family: 'Diogenes';
-    src: url(../resources/DIOGENES.ttf);
+    src: url(../resources/Anton-Regular.ttf);
 }
 
 body {
-    background: #f5cfaa;
+    background: #f9ff9c;
     overflow-x: hidden;
 }
 
@@ -15,25 +15,25 @@ body {
 
 #header {
     height: 6.8em;
-    border-bottom: 2px solid maroon;
+    border-bottom: 2px solid black;
     text-align: center;
-    background: burlywood;
+    background: #fdd97d;
 }
 
 #book-img {
     display: inline-block;
-    width: 8em;
-    height: 6em;
-    margin: 0.4em;
+    width: 7em;
+    height: 5em;
+    margin: 0.6em;
 }
 
 #title-text {
     position: relative;
-    bottom: 0.45em;
+    bottom: 0.2em;
     display: inline-block;
-    font-size: 4rem;
+    font-size: 4.5rem;
     font-family: 'Diogenes', sans-serif;
-    color: brown;
+    color: black;
 }
 
 #categories {
@@ -43,8 +43,8 @@ body {
     font-size: 1.5em;
     min-height: 100vh;
     box-sizing: border-box;
-    border-right: 2px solid maroon;
-    background: burlywood;
+    border-right: 2px solid black;
+    background: #fdd97d;
     width: 7em;
 }
 
@@ -53,7 +53,7 @@ body {
     font-family: 'Diogenes', sans-serif;
     text-align: center;
     margin: 1em 0.5em 1em 0.5em;
-    border-bottom: 2px solid maroon;
+    border-bottom: 2px solid black;
     height: 1.5em;
     padding-top: 0.2em;
     padding-bottom: 0.2em;
@@ -87,7 +87,7 @@ body {
     animation-name: fade;
     animation-duration: 1.5s;
     background: #fdd97d;
-    color: maroon;
+    color: black;
     border-radius: 10px;
     position: fixed;
     display: none;
@@ -111,7 +111,7 @@ body {
     font-family: inherit;
     padding: 5px;
     color: inherit;
-    outline-color: maroon;
+    outline-color: black;
 }
 
 #have-read {
