@@ -18,13 +18,10 @@ const titleInput = document.querySelector('#title');
 const authorInput = document.querySelector('#author');
 const pagesInput = document.querySelector('#pages');
 const haveReadInput = document.querySelector('#have-read');
-addBookUIBtn.addEventListener('click', printValue);
+addBookUIBtn.addEventListener('click', addBook);
 
-function printValue() {
-    console.log(titleInput.value);
-    console.log(authorInput.value);
-    console.log(pagesInput.value);
-    console.log(haveReadInput.value);
+function addBook() {
+    createCard(titleInput.value, authorInput.value, pagesInput.value, haveReadInput.value);
     titleInput.value="";
     authorInput.value="";
     pagesInput.value="";
@@ -84,8 +81,8 @@ function createCard(title, author, pages, haveRead) {
     const pagesPara = document.createElement('p');
     titlePara.textContent = title;
     authorPara.textContent = author;
-    pagesPara.textContent = pages;
-    titlePara.setAttribute('style', 'font-size: 27px; margin-bottom: 0.5em');
+    pagesPara.textContent = pages + ' pages';
+    titlePara.setAttribute('style', 'font-size: 28px; margin-bottom: 0.3em');
     authorPara.setAttribute('style', 'font-size: 20px; margin-bottom: 5px');
     pagesPara.setAttribute('style', 'font-size: 20px');
     card.classList.add('addCard');
