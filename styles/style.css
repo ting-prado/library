@@ -60,11 +60,6 @@ body {
     user-select: none;
 }
 
-#book-space {
-    min-height: 100vh;
-    margin-left: 1.8em;
-}
-
 #categories li:hover {
     color: maroon;
     cursor: pointer;
@@ -72,8 +67,8 @@ body {
 
 #addBookBtn {
     position: fixed;
-    top: 32em;
-    left: 75em;
+    top: 85%;
+    left: 93.5%;
     height: 42px;
     width: 42px;
 }
@@ -145,4 +140,24 @@ body {
     50% {
         opacity: 1;
     }
+}
+
+#book-space {
+    min-height: 100vh;
+    margin: 0.5em 0.5em 0.5em 2em;
+    border: 1px solid black;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-around;
+    align-content: flex-start;
+    padding: 1em;
+}
+
+.addCard {
+    font-family: 'Diogenes', sans-serif;
+    padding: 1em;
+    width: 45%;
+    min-height: 100px;
+    background: #d6b364;
+    margin-bottom: 1em;
 }

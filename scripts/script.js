@@ -12,7 +12,25 @@ addBookBtn.addEventListener('click', openUI);
 toBlur.forEach(element => {
     element.addEventListener('click', closeUI);
 })
-const addBookUIBtn = document.querySelector('click', addBook);
+const bookSpace = document.querySelector('#book-space');
+const addBookUIBtn = document.querySelector('#UIBtn');
+const titleInput = document.querySelector('#title');
+const authorInput = document.querySelector('#author');
+const pagesInput = document.querySelector('#pages');
+const haveReadInput = document.querySelector('#have-read');
+addBookUIBtn.addEventListener('click', printValue);
+
+function printValue() {
+    console.log(titleInput.value);
+    console.log(authorInput.value);
+    console.log(pagesInput.value);
+    console.log(haveReadInput.value);
+    titleInput.value="";
+    authorInput.value="";
+    pagesInput.value="";
+    haveReadInput.value = "yes";
+    closeUI();
+}
 
 function openUI() {
     if(addBookUI.style.display == 'none') {
@@ -55,5 +73,30 @@ function Book(title, author, pages, haveRead) {
     this.haveRead = haveRead;
 }
 
-function addBookToLibrary() {
+let sampleBook = new Book("The Jasmine Throne", "Tasha Suri", "500", "yes");
+myLibrary.push(sampleBook);
+console.log(myLibrary);
+
+function createCard(title, author, pages, haveRead) {
+    const card = document.createElement('div');
+    const titlePara = document.createElement('p');
+    const authorPara = document.createElement('p');
+    const pagesPara = document.createElement('p');
+    titlePara.textContent = title;
+    authorPara.textContent = author;
+    pagesPara.textContent = pages;
+    titlePara.setAttribute('style', 'font-size: 27px; margin-bottom: 0.5em');
+    authorPara.setAttribute('style', 'font-size: 20px; margin-bottom: 5px');
+    pagesPara.setAttribute('style', 'font-size: 20px');
+    card.classList.add('addCard');
+    bookSpace.appendChild(card);
+    card.appendChild(titlePara);
+    card.appendChild(authorPara);
+    card.appendChild(pagesPara);
 }
+
+createCard("The Jasmine Throne", "Tasha Suri", "500", "yes");
+createCard("Twenty Thousand Leagues Under the Sea", "Jules Verne", "426", "yes");
+createCard("Journey to the Center of the Earth", "Jules Verne", "384", "notyet");
+createCard("The Hitchhiker's Guide to the Galaxy", "Douglas Adams", "208", "notyet");
+createCard("How to Invent Everything: A Survival Guide for the Stranded Time Traveler", "Ryan North", "794", "notyet");
