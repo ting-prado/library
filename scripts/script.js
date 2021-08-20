@@ -15,7 +15,7 @@ toBlur.forEach(element => {
 
 function openUI() {
     if(addBookUI.style.display == 'none') {
-        addBookUI.style.display = 'block';
+        addBookUI.style.display = 'flex';
         toBlur.forEach(element => {
             element.classList.add('toBlurEffect');
         });
@@ -29,7 +29,7 @@ function openUI() {
 }
 
 function closeUI() {
-    if(addBookUI.style.display == 'block'){
+    if(addBookUI.style.display == 'flex'){
         addBookUI.style.display = 'none';
         toBlur.forEach(element => {
             element.classList.remove('toBlurEffect');

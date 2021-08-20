@@ -5,6 +5,7 @@
 
 body {
     background: #f5cfaa;
+    overflow-x: hidden;
 }
 
 #content {
@@ -13,7 +14,7 @@ body {
 }
 
 #header {
-    height: 7.5em;
+    height: 6.8em;
     border-bottom: 2px solid maroon;
     text-align: center;
 }
@@ -22,12 +23,12 @@ body {
     display: inline-block;
     width: 8em;
     height: 6em;
-    margin: 1em;
+    margin: 0.4em;
 }
 
 #title-text {
     position: relative;
-    bottom: 0.55em;
+    bottom: 0.45em;
     display: inline-block;
     font-size: 4rem;
     font-family: 'Diogenes', sans-serif;
@@ -55,7 +56,7 @@ body {
     height: 1.5em;
     padding-top: 0.2em;
     padding-bottom: 0.2em;
-    
+    user-select: none;
 }
 
 #book-space {
@@ -83,7 +84,7 @@ body {
     border-bottom: 2px solid maroon;
     height: 3em;
     width: 100%;
-    margin: 0;
+    margin-left: 1.3em;
 }
 
 #addBookBtn {
@@ -102,21 +103,56 @@ body {
 .addBookUI {
     animation-name: fade;
     animation-duration: 1s;
-    background: palegoldenrod;
+    background: #fdd97d;
+    color: maroon;
     border-radius: 10px;
     position: fixed;
     display: none;
-    bottom: 15%;
+    bottom: 12%;
     right: 50%;
     left: 35%;
-    height: 25em;
-    width: 30em;
-    border: 1px solid darkgoldenrod;
-    box-shadow: 0 0 20px 5px gray;
+    height: 425px;
+    width: 370px;
+    border: 2px solid #bd6203;
+    box-shadow: 0 0 15px 5px #b77f00;
+    flex-direction: column;
+    padding: 1em;
+    font-size: 24px;
+    font-family: 'Diogenes', sans-serif;
+}
+
+.addInput {
+    width: 17.5em;
+    font-size: 20px;
+    margin: 0.35em 0.3em 1em 0;
+    font-family: inherit;
+    padding: 5px;
+    color: inherit;
+    outline-color: maroon;
+}
+
+#have-read {
+    width: 18.2em;
+}
+
+#UIBtn {
+    width: 7em;
+    align-self: flex-end;
+    font-size: 20px;
+    font-family: inherit;
+    margin-right: 7px;
+    margin-top: 7px;
+    color: inherit;
+}
+
+#UIBtn:hover {
+    opacity: 0.9;
+    background: gold;
+    border-color: goldenrod;
 }
 
 .toBlurEffect {
-    filter: blur(3px);
+    filter: opacity(0.5) blur(1px);
 }
 
 @keyframes fade {
