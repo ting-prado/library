@@ -1,4 +1,5 @@
-let myLibrary = [];
+let myLibrary = [],
+    i = 1;
 
 const options = document.querySelectorAll('li');
 options.forEach(option => {
@@ -20,13 +21,28 @@ const pagesInput = document.querySelector('#pages');
 const haveReadInput = document.querySelector('#have-read');
 addBookUIBtn.addEventListener('click', addBook);
 
+let retrievedBooks = localStorage.getItem('bookData');
+let savedBooks = JSON.parse(retrievedBooks);
+let savedCards = localStorage.getItem('bookCards');
+if(retrievedBooks) {
+    console.log(retrievedBooks);
+    bookSpace.innerHTML = savedCards;
+}
+
 function addBook() {
-    createCard(titleInput.value, authorInput.value, pagesInput.value, haveReadInput.value);
-    titleInput.value="";
-    authorInput.value="";
-    pagesInput.value="";
-    haveReadInput.value = "yes";
-    closeUI();
+    if(titleInput.value !== '') {
+        createCard(titleInput.value, authorInput.value, pagesInput.value, haveReadInput.value, i);
+        let newBook = new Book(titleInput.value, authorInput.value, pagesInput.value, haveReadInput.value);
+        addBookToLibrary(newBook);
+        titleInput.value="";
+        authorInput.value="";
+        pagesInput.value="";
+        haveReadInput.value = "yes";
+        closeUI();
+    }
+    else {
+        alert('Please enter a title.');
+    }
 }
 
 function openUI() {
@@ -68,20 +84,22 @@ function Book(title, author, pages, haveRead) {
     this.author = author,
     this.pages = pages,
     this.haveRead = haveRead;
+    this.bookId = 'bookNum' + i;
+    i++;
 }
 
-let sampleBook = new Book("The Jasmine Throne", "Tasha Suri", "500", "yes");
-myLibrary.push(sampleBook);
-console.log(myLibrary);
-
-function createCard(title, author, pages, haveRead) {
+function createCard(title, author, pages, haveRead, bookNum) {
     const card = document.createElement('div');
     const titlePara = document.createElement('p');
     const authorPara = document.createElement('p');
     const pagesPara = document.createElement('p');
+    card.setAttribute('class', 'card');
+    card.setAttribute('id', `cardNum${i}`);
     titlePara.textContent = title;
     authorPara.textContent = author;
-    pagesPara.textContent = pages + ' pages';
+    if(pages != ''){
+        pagesPara.textContent = pages + ' pages';
+    }
     titlePara.setAttribute('style', 'font-size: 28px; margin-bottom: 0.3em');
     authorPara.setAttribute('style', 'font-size: 20px; margin-bottom: 5px');
     pagesPara.setAttribute('style', 'font-size: 20px');
@@ -92,8 +110,12 @@ function createCard(title, author, pages, haveRead) {
     card.appendChild(pagesPara);
 }
 
-createCard("The Jasmine Throne", "Tasha Suri", "500", "yes");
-createCard("Twenty Thousand Leagues Under the Sea", "Jules Verne", "426", "yes");
-createCard("Journey to the Center of the Earth", "Jules Verne", "384", "notyet");
-createCard("The Hitchhiker's Guide to the Galaxy", "Douglas Adams", "208", "notyet");
-createCard("How to Invent Everything: A Survival Guide for the Stranded Time Traveler", "Ryan North", "794", "notyet");
+function addBookToLibrary(newBook) {
+    myLibrary.push(newBook);
+    saveBook();
+}
+
+function saveBook() {
+    localStorage.setItem('bookData', JSON.stringify(myLibrary));
+    localStorage.setItem('bookCards', bookSpace.innerHTML);
+}

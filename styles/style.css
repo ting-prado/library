@@ -148,7 +148,7 @@ body {
     border: 2px solid black;
     display: flex;
     flex-wrap: wrap;
-    justify-content: space-around;
+    justify-content: space-between;
     align-content: flex-start;
     padding: 1em;
 }
