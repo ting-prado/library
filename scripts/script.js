@@ -1,5 +1,4 @@
-let myLibrary = [],
-    i = 1;
+let i=2;
 
 const options = document.querySelectorAll('li');
 options.forEach(option => {
@@ -21,17 +20,15 @@ const pagesInput = document.querySelector('#pages');
 const haveReadInput = document.querySelector('#have-read');
 addBookUIBtn.addEventListener('click', addBook);
 
-let retrievedBooks = localStorage.getItem('bookData');
-let savedBooks = JSON.parse(retrievedBooks);
+let myLibrary = localStorage.getItem('myLibrary');
+myLibrary = (myLibrary) ? JSON.parse(myLibrary) : [];
 let savedCards = localStorage.getItem('bookCards');
-if(retrievedBooks) {
-    console.log(retrievedBooks);
+if(savedCards) {
     bookSpace.innerHTML = savedCards;
 }
 
 function addBook() {
     if(titleInput.value !== '') {
-        createCard(titleInput.value, authorInput.value, pagesInput.value, haveReadInput.value, i);
         let newBook = new Book(titleInput.value, authorInput.value, pagesInput.value, haveReadInput.value);
         addBookToLibrary(newBook);
         titleInput.value="";
@@ -72,7 +69,7 @@ function closeUI() {
 
 function changeColor(e) {
     this.style.color = 'maroon';
-    for(let i=1; i<options.length; i++){
+    for(let i=0; i<options.length; i++){
         if(options[i].id != this.id) {
             options[i].style.color = 'black';
         }
@@ -83,8 +80,9 @@ function Book(title, author, pages, haveRead) {
     this.title = title,
     this.author = author,
     this.pages = pages,
-    this.haveRead = haveRead;
-    this.bookId = 'bookNum' + i;
+    this.haveRead = haveRead,
+    this.bookId = 'bookNum' + i,
+    this.card = createCard(this.title, this.author, this.pages, this.haveRead);
     i++;
 }
 
@@ -93,7 +91,9 @@ function createCard(title, author, pages, haveRead, bookNum) {
     const titlePara = document.createElement('p');
     const authorPara = document.createElement('p');
     const pagesPara = document.createElement('p');
-    card.setAttribute('class', 'card');
+    const sliderCont = document.createElement('div');
+    const toggleBg = document.createElement('div');
+    const toggleCircle = document.createElement('div');
     card.setAttribute('id', `cardNum${i}`);
     titlePara.textContent = title;
     authorPara.textContent = author;
@@ -104,10 +104,24 @@ function createCard(title, author, pages, haveRead, bookNum) {
     authorPara.setAttribute('style', 'font-size: 20px; margin-bottom: 5px');
     pagesPara.setAttribute('style', 'font-size: 20px');
     card.classList.add('addCard');
+    sliderCont.classList.add('sliderCont');
+    toggleBg.classList.add('toggleBg');
+    toggleCircle.classList.add('toggleCircle');
+    if(haveRead == 'notyet') {
+        toggleCircle.setAttribute('style', 'margin-right: auto');
+    }
+    else {
+        toggleCircle.setAttribute('style', 'margin-left: auto; background: #fff1ad');
+        toggleBg.style.backgroundColor = 'black';
+    }
     bookSpace.appendChild(card);
     card.appendChild(titlePara);
     card.appendChild(authorPara);
     card.appendChild(pagesPara);
+    card.appendChild(sliderCont);
+    sliderCont.appendChild(toggleBg);
+    toggleBg.appendChild(toggleCircle);
+    return card.id;
 }
 
 function addBookToLibrary(newBook) {
@@ -116,6 +130,6 @@ function addBookToLibrary(newBook) {
 }
 
 function saveBook() {
-    localStorage.setItem('bookData', JSON.stringify(myLibrary));
+    localStorage.setItem('myLibrary', JSON.stringify(myLibrary));
     localStorage.setItem('bookCards', bookSpace.innerHTML);
 }
