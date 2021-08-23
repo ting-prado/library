@@ -1,8 +1,7 @@
-let i=2;
-
 const options = document.querySelectorAll('li');
 options.forEach(option => {
     option.addEventListener('click', changeColor);
+    option.addEventListener('click', changeDisplayedCards);
 });
 
 const toBlur = document.querySelectorAll('.toBlur');
@@ -81,9 +80,7 @@ function Book(title, author, pages, haveRead) {
     this.author = author,
     this.pages = pages,
     this.haveRead = haveRead,
-    this.bookId = 'bookNum' + i,
     this.card = createCard(this.title, this.author, this.pages, this.haveRead);
-    i++;
 }
 
 function createCard(title, author, pages, haveRead, bookNum) {
@@ -94,7 +91,16 @@ function createCard(title, author, pages, haveRead, bookNum) {
     const sliderCont = document.createElement('div');
     const toggleBg = document.createElement('div');
     const toggleCircle = document.createElement('div');
-    card.setAttribute('id', `cardNum${i}`);
+    let i = Math.floor(Math.random()*1000);
+    myLibrary.forEach(existingCard => {
+        if(existingCard.id != `cardNum${i}`){
+            card.setAttribute('id', `cardNum${i}`);
+        }
+        else{
+            i = Math.floor(Math.random()*(1999) + 1001);
+            card.setAttribute('id', `cardNum${i}`);
+        }
+    });
     titlePara.textContent = title;
     authorPara.textContent = author;
     if(pages != ''){
@@ -132,4 +138,29 @@ function addBookToLibrary(newBook) {
 function saveBook() {
     localStorage.setItem('myLibrary', JSON.stringify(myLibrary));
     localStorage.setItem('bookCards', bookSpace.innerHTML);
+}
+
+function changeDisplayedCards(e) {
+    let currentCards = localStorage.getItem('bookCards'); 
+    if(this.id == 'firstOp'){ 
+        bookSpace.innerHTML = currentCards; 
+    } 
+    else if(this.id == 'secondOp'){
+        bookSpace.innerHTML = currentCards;  
+        myLibrary.forEach(card => { 
+        if(card.haveRead == 'yes') { 
+            let cardDiv = document.querySelector(`#${card.card}`);
+            bookSpace.removeChild(cardDiv);
+        } 
+    }); 
+    }
+    else if(this.id == 'thirdOp'){
+        bookSpace.innerHTML = currentCards; 
+        myLibrary.forEach(card => { 
+        if(card.haveRead == 'notyet') { 
+                let cardDiv = document.querySelector(`#${card.card}`);
+                bookSpace.removeChild(cardDiv);
+            } 
+        }); 
+        }
 }
