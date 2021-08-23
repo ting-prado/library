@@ -23,6 +23,7 @@ let i = localStorage.getItem('i');
 i = (i) ? JSON.parse(i) : 1;
 let myLibrary = localStorage.getItem('myLibrary');
 myLibrary = (myLibrary) ? JSON.parse(myLibrary) : [];
+
 myLibrary.forEach(book => {
     createCard(book.title, book.author, book.pages, book.haveRead, book.bookId);
 });
@@ -40,6 +41,7 @@ function addBook() {
         pagesInput.value="";
         haveReadInput.value = "yes";
         closeUI();
+        options[0].style.color = 'maroon';
     }
     else {
         alert('Please enter a title.');
@@ -126,8 +128,27 @@ function createCard(title, author, pages, haveRead, bookNum) {
     card.appendChild(bottomCont);
     bottomCont.appendChild(toggleBg);
     toggleBg.appendChild(toggleCircle);
+    toggleBg.addEventListener('click', changeReadStatus);
     bottomCont.appendChild(deleteBtn);
     deleteBtn.addEventListener('click', deleteBook);
+}
+
+function changeReadStatus(e) {
+    let bookId = this.parentNode.parentNode.id;
+    let book = myLibrary.find(book => book.bookId == bookId);
+    const toggleCircle = document.querySelector(`#${bookId} .toggleCircle`);
+    const toggleBg = document.querySelector(`#${bookId} .toggleBg`);
+    if(book.haveRead == 'notyet') {
+        toggleCircle.setAttribute('style', 'margin-left: auto; background: #fff1ad');
+        toggleBg.setAttribute('style', 'background: black');
+        book.haveRead = 'yes';
+    }
+    else {
+        toggleCircle.setAttribute('style', 'margin-right: auto; background: black');
+        toggleBg.style.backgroundColor = '#fff1ad';
+        book.haveRead = 'notyet';
+    }
+    localStorage.setItem('myLibrary', JSON.stringify(myLibrary));
 }
 
 function deleteBook(e) {
@@ -151,12 +172,25 @@ function addBookToLibrary(newBook) {
 
 function changeDisplayedCards(e) {
     if(this.id == 'firstOp'){ 
-
+        bookSpace.innerHTML = "";
+        myLibrary.forEach(book => {
+            createCard(book.title, book.author, book.pages, book.haveRead, book.bookId);
+        });
     } 
     else if(this.id == 'secondOp'){
-
+        bookSpace.innerHTML = "";
+        myLibrary.forEach(book => {
+            if(book.haveRead == 'notyet'){
+                createCard(book.title, book.author, book.pages, book.haveRead, book.bookId);
+            }
+        });
     }
     else if(this.id == 'thirdOp'){
-
+        bookSpace.innerHTML = "";
+        myLibrary.forEach(book => {
+            if(book.haveRead == 'yes'){
+                createCard(book.title, book.author, book.pages, book.haveRead, book.bookId);
+            }
+        });
     }
 }
