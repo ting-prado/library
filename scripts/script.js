@@ -131,7 +131,17 @@ function createCard(title, author, pages, haveRead, bookNum) {
 }
 
 function deleteBook(e) {
-    
+    myLibrary.forEach(book => {
+        if(e.path[2].id == book.bookId){
+            let index = myLibrary.indexOf(book);
+            myLibrary.splice(index, 1);
+            localStorage.setItem('myLibrary', JSON.stringify(myLibrary));
+        }
+        bookSpace.innerHTML = "";
+        myLibrary.forEach(book => {
+            createCard(book.title, book.author, book.pages, book.haveRead, book.bookId);
+        });
+    });
 }
 
 function addBookToLibrary(newBook) {
