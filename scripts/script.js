@@ -83,34 +83,39 @@ function Book(title, author, pages, haveRead) {
     this.card = createCard(this.title, this.author, this.pages, this.haveRead);
 }
 
-function createCard(title, author, pages, haveRead, bookNum) {
+function createCard(title, author, pages, haveRead) {
     const card = document.createElement('div');
     const titlePara = document.createElement('p');
     const authorPara = document.createElement('p');
     const pagesPara = document.createElement('p');
-    const sliderCont = document.createElement('div');
+    const bottomCont = document.createElement('div');
     const toggleBg = document.createElement('div');
     const toggleCircle = document.createElement('div');
+    const deleteBtn = document.createElement('div');
     let i = Math.floor(Math.random()*1000);
-    myLibrary.forEach(existingCard => {
-        if(existingCard.id != `cardNum${i}`){
-            card.setAttribute('id', `cardNum${i}`);
+    if(myLibrary != ''){
+        if(myLibrary.includes(`cardNum${i}`)){
+            card.id = `cardNum${Math.floor(Math.random()*(1999) + 1000)}`;
         }
-        else{
-            i = Math.floor(Math.random()*(1999) + 1001);
-            card.setAttribute('id', `cardNum${i}`);
+        else {
+            card.id = `cardNum${i}`;
         }
-    });
+    }
+    else{
+        card.id = `cardNum${i}`;
+    }
     titlePara.textContent = title;
     authorPara.textContent = author;
     if(pages != ''){
         pagesPara.textContent = pages + ' pages';
     }
-    titlePara.setAttribute('style', 'font-size: 28px; margin-bottom: 0.3em');
+    titlePara.setAttribute('style', 'font-size: 28px; margin-bottom: 0.3em; display: inline-block');
     authorPara.setAttribute('style', 'font-size: 20px; margin-bottom: 5px');
     pagesPara.setAttribute('style', 'font-size: 20px');
     card.classList.add('addCard');
-    sliderCont.classList.add('sliderCont');
+    deleteBtn.classList.add('deleteBtn');
+    deleteBtn.textContent = 'x';
+    bottomCont.classList.add('bottomCont');
     toggleBg.classList.add('toggleBg');
     toggleCircle.classList.add('toggleCircle');
     if(haveRead == 'notyet') {
@@ -124,9 +129,10 @@ function createCard(title, author, pages, haveRead, bookNum) {
     card.appendChild(titlePara);
     card.appendChild(authorPara);
     card.appendChild(pagesPara);
-    card.appendChild(sliderCont);
-    sliderCont.appendChild(toggleBg);
+    card.appendChild(bottomCont);
+    bottomCont.appendChild(toggleBg);
     toggleBg.appendChild(toggleCircle);
+    bottomCont.appendChild(deleteBtn);
     return card.id;
 }
 
@@ -158,9 +164,9 @@ function changeDisplayedCards(e) {
         bookSpace.innerHTML = currentCards; 
         myLibrary.forEach(card => { 
         if(card.haveRead == 'notyet') { 
-                let cardDiv = document.querySelector(`#${card.card}`);
-                bookSpace.removeChild(cardDiv);
+            let cardDiv = document.querySelector(`#${card.card}`);
+            bookSpace.removeChild(cardDiv);
             } 
         }); 
-        }
+    }
 }

@@ -162,26 +162,49 @@ body {
     margin-bottom: 1em;
 }
 
-.sliderCont {
+.bottomCont {
+    margin-top: 2px;
     margin-left: auto;
-    width: 3em;
+    width: 7em;
     height: 1.5em;
     padding-top: 10px;
     padding-bottom: 0;
+    display: flex;
+    justify-content: center;
 }
 
 .toggleBg {
     width: 3em;
-    height: 1em;
+    height: 1.1em;
     background: #fff1ad;
     border-radius: 10px;
     padding-bottom: 2px;
+    margin: 0 5px;
 }
 
 .toggleCircle {
     border: 1px solid black;
     border-radius: 10px;
-    height: 1em;
+    height: 1.1em;
     width: 1.5em;
     background: black;
+}
+
+.toggleBg:hover, .toggleCircle:hover {
+    cursor: pointer;
+}
+
+.deleteBtn {
+    background: #fff1ad;
+    width: 2.3em;
+    height: 1.2em;
+    border-radius: 10px;
+    text-align: center;
+    user-select: text;
+}
+
+.deleteBtn:hover {
+    background: maroon;
+    cursor: pointer;
+    color: white;
 }
