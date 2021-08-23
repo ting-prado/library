@@ -201,6 +201,7 @@ body {
     border-radius: 10px;
     text-align: center;
     user-select: text;
+    border: 1px solid maroon;
 }
 
 .deleteBtn:hover {

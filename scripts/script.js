@@ -19,17 +19,22 @@ const pagesInput = document.querySelector('#pages');
 const haveReadInput = document.querySelector('#have-read');
 addBookUIBtn.addEventListener('click', addBook);
 
+let i = localStorage.getItem('i');
+i = (i) ? JSON.parse(i) : 1;
 let myLibrary = localStorage.getItem('myLibrary');
 myLibrary = (myLibrary) ? JSON.parse(myLibrary) : [];
-let savedCards = localStorage.getItem('bookCards');
-if(savedCards) {
-    bookSpace.innerHTML = savedCards;
-}
+myLibrary.forEach(book => {
+    createCard(book.title, book.author, book.pages, book.haveRead, book.bookId);
+});
 
 function addBook() {
     if(titleInput.value !== '') {
-        let newBook = new Book(titleInput.value, authorInput.value, pagesInput.value, haveReadInput.value);
+        let bookNum = `bookNum${i}`;
+        let newBook = new Book(titleInput.value, authorInput.value, pagesInput.value, haveReadInput.value, bookNum);
+        createCard(titleInput.value, authorInput.value, pagesInput.value, haveReadInput.value, bookNum);
         addBookToLibrary(newBook);
+        i++;
+        localStorage.setItem('i', i);
         titleInput.value="";
         authorInput.value="";
         pagesInput.value="";
@@ -66,6 +71,14 @@ function closeUI() {
     else return;
 }
 
+function Book(title, author, pages, haveRead, bookId) {
+    this.title = title,
+    this.author = author,
+    this.pages = pages,
+    this.haveRead = haveRead,
+    this.bookId = bookId;
+}
+
 function changeColor(e) {
     this.style.color = 'maroon';
     for(let i=0; i<options.length; i++){
@@ -75,15 +88,7 @@ function changeColor(e) {
     }
 }
 
-function Book(title, author, pages, haveRead) {
-    this.title = title,
-    this.author = author,
-    this.pages = pages,
-    this.haveRead = haveRead,
-    this.card = createCard(this.title, this.author, this.pages, this.haveRead);
-}
-
-function createCard(title, author, pages, haveRead) {
+function createCard(title, author, pages, haveRead, bookNum) {
     const card = document.createElement('div');
     const titlePara = document.createElement('p');
     const authorPara = document.createElement('p');
@@ -92,18 +97,7 @@ function createCard(title, author, pages, haveRead) {
     const toggleBg = document.createElement('div');
     const toggleCircle = document.createElement('div');
     const deleteBtn = document.createElement('div');
-    let i = Math.floor(Math.random()*1000);
-    if(myLibrary != ''){
-        if(myLibrary.includes(`cardNum${i}`)){
-            card.id = `cardNum${Math.floor(Math.random()*(1999) + 1000)}`;
-        }
-        else {
-            card.id = `cardNum${i}`;
-        }
-    }
-    else{
-        card.id = `cardNum${i}`;
-    }
+    card.setAttribute('id', bookNum);
     titlePara.textContent = title;
     authorPara.textContent = author;
     if(pages != ''){
@@ -133,40 +127,26 @@ function createCard(title, author, pages, haveRead) {
     bottomCont.appendChild(toggleBg);
     toggleBg.appendChild(toggleCircle);
     bottomCont.appendChild(deleteBtn);
-    return card.id;
+    deleteBtn.addEventListener('click', deleteBook);
+}
+
+function deleteBook(e) {
+    
 }
 
 function addBookToLibrary(newBook) {
     myLibrary.push(newBook);
-    saveBook();
-}
-
-function saveBook() {
     localStorage.setItem('myLibrary', JSON.stringify(myLibrary));
-    localStorage.setItem('bookCards', bookSpace.innerHTML);
 }
 
 function changeDisplayedCards(e) {
-    let currentCards = localStorage.getItem('bookCards'); 
     if(this.id == 'firstOp'){ 
-        bookSpace.innerHTML = currentCards; 
+
     } 
     else if(this.id == 'secondOp'){
-        bookSpace.innerHTML = currentCards;  
-        myLibrary.forEach(card => { 
-        if(card.haveRead == 'yes') { 
-            let cardDiv = document.querySelector(`#${card.card}`);
-            bookSpace.removeChild(cardDiv);
-        } 
-    }); 
+
     }
     else if(this.id == 'thirdOp'){
-        bookSpace.innerHTML = currentCards; 
-        myLibrary.forEach(card => { 
-        if(card.haveRead == 'notyet') { 
-            let cardDiv = document.querySelector(`#${card.card}`);
-            bookSpace.removeChild(cardDiv);
-            } 
-        }); 
+
     }
 }
