@@ -27,6 +27,6 @@ The user will be given an empty shelf. An add button can be found at the bottom 
 * Object Construction
 * Dev tools familiarity
 
-## Conclusion
+## Thoughts After Completion
 
 This project gave me a lot of headache from start to finish. Every step of the way feels like a dead-end and I had to back away to arrive at a solution. This made me realize how important it really is to plan ahead and know what your wanted outputs are. Overall, it was really frustrating but rewarding once I was done with it.
