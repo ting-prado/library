@@ -30,6 +30,16 @@ myLibrary = (myLibrary) ? JSON.parse(myLibrary) : [{
     pages: '426'
 }];
 
+class Book {
+    constructor(title, author, pages, haveRead, bookId) {
+        this.title = title;
+        this.author = author;
+        this.pages = pages;
+        this.haveRead = haveRead;
+        this.bookId = bookId;
+    }
+}
+
 myLibrary.forEach(book => {
     createCard(book.title, book.author, book.pages, book.haveRead, book.bookId);
 });
@@ -77,14 +87,6 @@ function closeUI() {
         });
     }
     else return;
-}
-
-function Book(title, author, pages, haveRead, bookId) {
-    this.title = title,
-    this.author = author,
-    this.pages = pages,
-    this.haveRead = haveRead,
-    this.bookId = bookId;
 }
 
 function changeColor(e) {
