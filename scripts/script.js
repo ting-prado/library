@@ -20,9 +20,15 @@ const haveReadInput = document.querySelector('#have-read');
 addBookUIBtn.addEventListener('click', addBook);
 
 let i = localStorage.getItem('i');
-i = (i) ? JSON.parse(i) : 1;
+i = (i) ? JSON.parse(i) : 2;
 let myLibrary = localStorage.getItem('myLibrary');
-myLibrary = (myLibrary) ? JSON.parse(myLibrary) : [];
+myLibrary = (myLibrary) ? JSON.parse(myLibrary) : [{
+    title: 'Twenty Thousand Leagues Under the Sea',
+    author: 'Jules Verne',
+    bookId: 'bookNum1',
+    haveRead: 'yes',
+    pages: '426'
+}];
 
 myLibrary.forEach(book => {
     createCard(book.title, book.author, book.pages, book.haveRead, book.bookId);
