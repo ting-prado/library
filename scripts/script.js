@@ -35,7 +35,7 @@ myLibrary.forEach(book => {
 });
 
 function addBook() {
-    if(titleInput.value !== '') {
+    if(titleInput.validity.valid && authorInput.validity.valid && pagesInput.validity.valid){
         let bookNum = `bookNum${i}`;
         let newBook = new Book(titleInput.value, authorInput.value, pagesInput.value, haveReadInput.value, bookNum);
         createCard(titleInput.value, authorInput.value, pagesInput.value, haveReadInput.value, bookNum);
@@ -48,9 +48,6 @@ function addBook() {
         haveReadInput.value = "yes";
         closeUI();
         options[0].style.color = 'maroon';
-    }
-    else {
-        alert('Please enter a title.');
     }
 }
 

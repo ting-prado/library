@@ -127,6 +127,7 @@ body {
     opacity: 0.9;
     background: gold;
     border-color: goldenrod;
+    cursor: pointer;
 }
 
 .toBlurEffect {
